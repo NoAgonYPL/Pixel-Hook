@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    [SerializeField] Top_Down_Grapple grappleHook; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,9 +71,16 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //Declare the velocity the player will be moving in.
-        horizontal = rb.velocity.x; 
+        horizontal = rb.velocity.x;
         //Get the axis the player is moving in. 
-        horizontal += Input.GetAxisRaw("Horizontal");
+        if (!grappleHook.retracting)
+        {
+            horizontal += Input.GetAxisRaw("Horizontal");
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
 
         //damping when stopped horizontal math
         if(Mathf.Abs(Input.GetAxisRaw("Horizontal")) < 0.01f)
@@ -91,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
         }     
         //Move the player in the horizontal axis if they use the horizontal keybindings.
         rb.velocity = new Vector2(horizontal, rb.velocity.y);
+
     }
 
     private bool IsGrounded()

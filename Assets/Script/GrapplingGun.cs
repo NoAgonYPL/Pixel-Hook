@@ -42,7 +42,6 @@ public class GrapplingGun : MonoBehaviour
     void StartGrapple()
     {
         RaycastHit2D hitInfo = Physics2D.Raycast(gunTip.position, gunTip.right);
-        Debug.Log(hitInfo.collider.name);
 
         if(hitInfo)
         {
