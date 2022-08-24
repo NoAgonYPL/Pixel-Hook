@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     public float speed = 10f;
     public float jumpPower = 20f;
-    public float fastfall = 3f;
+    public float cutJumpHeight = 0.5f;
     private bool isFacingRight = true;
     float jumpTimer;
     float jumpRemmeberTime = 0.2f;
@@ -57,14 +57,12 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
         }
         //Hold jump to jump higher.
-        if (jumpTimer > 0 && rb.velocity.y > 0f)
+        if (Input.GetButtonUp("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
-        //Hold to fastfall 
-        if(Input.GetKey(KeyCode.S) && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -fastfall);
+            if (rb.velocity.y > 0f)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * cutJumpHeight);
+            }
         }
     }
 

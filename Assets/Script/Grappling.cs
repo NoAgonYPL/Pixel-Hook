@@ -26,7 +26,7 @@ public class Grappling : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Vector2 mousePos = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             lineRenderer.SetPosition(0, mousePos);
             lineRenderer.SetPosition(1, transform.position);
             distanceJoint2D.connectedAnchor = mousePos;
