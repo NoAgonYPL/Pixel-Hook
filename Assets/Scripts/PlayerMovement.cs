@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 10f;
     public float jumpPower = 20f;
     public float cutJumpHeight = 0.5f;
-    private bool isFacingRight = true;
     float jumpTimer;
     float jumpRemmeberTime = 0.2f;
     float groundedTimer;
@@ -21,19 +20,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
-    [SerializeField] Top_Down_Grapple grappleHook; 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         Jumping();
-        Flip();
     }
 
     private void Jumping()
@@ -72,15 +62,9 @@ public class PlayerMovement : MonoBehaviour
     {
         //Declare the velocity the player will be moving in.
         horizontal = rb.velocity.x;
-        //Get the axis the player is moving in. 
-        if (!grappleHook.retracting)
-        {
-            horizontal += Input.GetAxisRaw("Horizontal");
-        }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
+        //Get the axis the player is moving in.
+        horizontal += Input.GetAxisRaw("Horizontal");
+         
 
         //damping when stopped horizontal math
         if(Mathf.Abs(Input.GetAxisRaw("Horizontal")) < 0.01f)
@@ -107,17 +91,5 @@ public class PlayerMovement : MonoBehaviour
     {
         //Return an Collision circle at the groundchecks position and check the groundlayer mask for detection. 
         return Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);  
-    }
-
-    private void Flip() 
-    //Flip the player to turn left or right
-    {
-        if(isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
-        {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
     }
 }
