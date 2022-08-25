@@ -5,16 +5,17 @@ using UnityEngine;
 public class Top_Down_Grapple : MonoBehaviour
 {
     LineRenderer line;
+    DistanceJoint2D rope;
     [SerializeField] LayerMask grappleMask;
     [SerializeField] float maxDistance = 10f;
     [SerializeField] float grappleSpeed = 10f;
     [Header("How long it takes for the grapple to hit the object")]
     [SerializeField]float grappleShotSpeed = 20f;
+    [SerializeField] Transform player;
     [SerializeField] Transform gunTip;
     [SerializeField] GameObject grapplingGun;
     [SerializeField] float grapple_Range;
     [SerializeField] float grapplingGunRotationSpeed;
-
 
     bool isGrappling = false;
     [HideInInspector] public bool retracting = false;
@@ -25,6 +26,9 @@ public class Top_Down_Grapple : MonoBehaviour
     void Start()
     {
         line = GetComponent<LineRenderer>();
+        rope = GetComponent<DistanceJoint2D>();
+        rope.enabled = false;
+        line.enabled = false;
     }
 
     // Update is called once per frame
@@ -33,6 +37,14 @@ public class Top_Down_Grapple : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && !isGrappling)
         {
             StartGrapple();
+        }
+        if (Input.GetMouseButtonUp(0) && isGrappling)
+        {
+            retracting = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            DisableRope();
         }
 
         //Moves the player to grapple point.
@@ -44,12 +56,10 @@ public class Top_Down_Grapple : MonoBehaviour
 
             line.SetPosition(0, transform.position);
 
-
             if(Vector2.Distance(transform.position, target) < 0.5f)
             {
-                    line.enabled = false;
-                    retracting = false;
-                    isGrappling = false;
+                DisableRope();
+                isGrappling = false;
             }
         }
     }
@@ -89,16 +99,19 @@ public class Top_Down_Grapple : MonoBehaviour
     {
         //Fire a raycast at the tip of the gun, forward and it has a max distance. 
         RaycastHit2D hit = Physics2D.Raycast(gunTip.position, gunTip.right, maxDistance);
+        //Fire a line when the raycast is cast.
+        line.enabled = true;
+        line.SetPosition(0, gunTip.position);
+        line.SetPosition(1, gunTip.position + gunTip.right * maxDistance);
         //If it hits something
         if (hit && !isGrappling)
         {
             
             Debug.Log(hit.transform.name);
+            Grapple();
+            StartCoroutine(GrappleNothing());
             //isGrappling = true;
             //target = hit.point;
-            line.enabled = true;
-            line.SetPosition(0, gunTip.position);
-            line.SetPosition(1, hit.point);
             //StartCoroutine(Grapple());
         }
         //If it does not hit something it should fire the grapplinghook anyway and if hit's something now. 
@@ -106,21 +119,31 @@ public class Top_Down_Grapple : MonoBehaviour
         {
             Debug.Log("I hit nothing");
             StartCoroutine(GrappleNothing());
-           
         }
+
+    }
+
+    void Grapple()
+    {
+        rope.enabled = true;
+
+        line.enabled = true;
+        line.SetPosition(1, player.position);
     }
 
     //Turn on grapple effect if we don't grapple anything.
     IEnumerator GrappleNothing()
     {
-        line.enabled = true;
-        line.SetPosition(0, gunTip.position);
-        line.SetPosition(1, gunTip.position + gunTip.right * 10);
-
         yield return new WaitForSeconds(6);
 
         line.enabled = false;
         
+    }
+
+    public void DisableRope()
+    {
+        rope.enabled = false;
+        line.enabled = false;
     }
 
     //Makes sure that we grapple 

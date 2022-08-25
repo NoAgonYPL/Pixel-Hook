@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 226060721}
   - component: {fileID: 226060720}
   - component: {fileID: 226060726}
+  - component: {fileID: 226060727}
   m_Layer: 0
   m_Name: Player_Other_test
   m_TagString: Untagged
@@ -279,6 +280,7 @@ MonoBehaviour:
   maxDistance: 5
   grappleSpeed: 10
   grappleShotSpeed: 40
+  player: {fileID: 226060725}
   gunTip: {fileID: 1645141479}
   grapplingGun: {fileID: 33848372}
   grapple_Range: 0
@@ -377,7 +379,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.25
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -422,8 +424,8 @@ LineRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
-    numCapVertices: 0
+    numCornerVertices: 1
+    numCapVertices: 10
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
@@ -522,6 +524,25 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!232 &226060727
+DistanceJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226060719}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 5.627335
+  m_MaxDistanceOnly: 0
 --- !u!1 &525430963
 GameObject:
   m_ObjectHideFlags: 0
