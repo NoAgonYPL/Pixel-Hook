@@ -127,7 +127,7 @@ public class Tutorial_GrapplingGun : MonoBehaviour
                     grappleRope.enabled = true;
                 }
             }
-            else
+            else if(!_hit)
             {
                 grappleRope.DrawRopeNoWaves();
                 grappleDistanceVector = grapplePoint - (Vector2)gunPivot.right;

@@ -99,11 +99,10 @@ public class Tutorial_GrapplingRope : MonoBehaviour
     {
         for (int i = 0; i < percision; i++)
         {
-            float delta = (float)i / ((float)percision - 1f);
+            float delta = i / (percision - 1f);
             Vector2 offset = Vector2.Perpendicular(grapplingGun.grappleDistanceVector).normalized * ropeAnimationCurve.Evaluate(delta) * waveSize;
             Vector2 targetPosition = Vector2.Lerp(grapplingGun.firePoint.position, grapplingGun.grapplePoint, delta) + offset;
             Vector2 currentPosition = Vector2.Lerp(grapplingGun.firePoint.position, targetPosition, ropeProgressionCurve.Evaluate(moveTime) * ropeProgressionSpeed);
-
             m_lineRenderer.SetPosition(i, currentPosition);
         }
     }

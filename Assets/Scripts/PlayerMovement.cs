@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    [SerializeField] Rope rope;
+
     // Update is called once per frame
     void Update()
     {
@@ -39,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jumpTimer = jumpRemmeberTime;
-           
         }
         //Jump
         if(jumpTimer > 0 && (groundedTimer > 0))
@@ -63,8 +64,10 @@ public class PlayerMovement : MonoBehaviour
         //Declare the velocity the player will be moving in.
         horizontal = rb.velocity.x;
         //Get the axis the player is moving in.
-        horizontal += Input.GetAxisRaw("Horizontal");
-         
+        if (!rope.pull)
+        {
+            horizontal += Input.GetAxisRaw("Horizontal");
+        }
 
         //damping when stopped horizontal math
         if(Mathf.Abs(Input.GetAxisRaw("Horizontal")) < 0.01f)
@@ -84,7 +87,6 @@ public class PlayerMovement : MonoBehaviour
         }     
         //Move the player in the horizontal axis if they use the horizontal keybindings.
         rb.velocity = new Vector2(horizontal, rb.velocity.y);
-
     }
 
     private bool IsGrounded()
