@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -12,14 +10,13 @@ public class PlayerMovement : MonoBehaviour
     float jumpRemmeberTime = 0.2f;
     float groundedTimer;
     float groundedRemmeberTime = 0.2f;
-    [SerializeField]float horizontalDamping = 0.5f;
+    [SerializeField] float horizontalDamping = 0.5f;
     [SerializeField] float dampingWhenStopped = 0.2f;
     [SerializeField] float dampingWhenTurning = 0.1f;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
-
+    [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] Rope rope;
 
     // Update is called once per frame
@@ -63,12 +60,10 @@ public class PlayerMovement : MonoBehaviour
     {
         //Declare the velocity the player will be moving in.
         horizontal = rb.velocity.x;
-        //Get the axis the player is moving in.
-        if (!rope.pull)
-        {
-            horizontal += Input.GetAxisRaw("Horizontal");
-        }
 
+        //Get the axis the player is moving in.
+        horizontal += Input.GetAxisRaw("Horizontal");
+        
         //damping when stopped horizontal math
         if(Mathf.Abs(Input.GetAxisRaw("Horizontal")) < 0.01f)
         {
@@ -92,6 +87,6 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         //Return an Collision circle at the groundchecks position and check the groundlayer mask for detection. 
-        return Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);  
+        return Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayerMask);
     }
 }
