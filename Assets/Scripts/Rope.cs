@@ -3,21 +3,28 @@ using UnityEngine;
 public class Rope : MonoBehaviour
 {
     // Start is called before the first frame update
-    public LineRenderer line;
-
-    public Material mat;
-    public Rigidbody2D origin;
-    public float line_width = .1f;
-    public float speed = 75;
-    public float pull_force = 50;
-    public float maxDistance = 20;
-    private Vector3 velocity;
-    protected bool pull = false;
-    public CircleCollider2D circleCollider;
-    public int layerToGrab = 9;
+    [Header("Ref to different components.")]
+    [SerializeField] LineRenderer line;
+    [SerializeField] Material mat;
+    [SerializeField] Rigidbody2D origin;
     [SerializeField] GameObject hook;
+    [SerializeField] CircleCollider2D circleCollider;
     [SerializeField] float miniHookDistance;
     [SerializeField] RopeSetter ropeSetter;
+    Grapple_Stick_To_Wall grapple_Stick_To_Wall;
+
+    [Header("The travel speed for the grappling hook.")]
+    [SerializeField] float speed = 75;
+    [Header("Grappling hooks dragging power on the player.")]
+    [SerializeField] float pull_force = 50;
+    [Header("Max distance the hook can travel.")]
+    [SerializeField] float maxDistance = 20;
+    [Header("Layer that should be grabebale.")]
+    [SerializeField] int layerToGrab = 9;
+
+    //The velocity of the hook.
+    private Vector3 velocity;
+    protected bool pull = false;
 
     void Start()
     {
@@ -44,6 +51,7 @@ public class Rope : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //If the player hit an object with the grappling hook. 
         if (pull)
         {
@@ -56,7 +64,7 @@ public class Rope : MonoBehaviour
             //Add a force to the player.
             origin.AddForce(dir * pull_force);
 
-         
+       
         }
         else
         {
@@ -73,7 +81,6 @@ public class Rope : MonoBehaviour
                 return;
             }
         }
-  
         //Draw a line from this object and the player. 
         line.SetPosition(0, transform.position);
         line.SetPosition(1, origin.position);
@@ -95,7 +102,7 @@ public class Rope : MonoBehaviour
         ropeSetter.playerCantGrapple = false;
     }
 
-    //If we collide with an object. 
+    //If this object collide with an object. 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.layer == layerToGrab)
@@ -108,10 +115,48 @@ public class Rope : MonoBehaviour
 
             //Enabling and disabling variebales:
             pull = true;
+
+            //Get ref from hit target.
+            grapple_Stick_To_Wall = collision.GetComponent<Grapple_Stick_To_Wall>();
+
+            //Incase there is no grapple_Stick_to_wall script attached to the object we are hitting, return null. 
+            if (grapple_Stick_To_Wall == null)
+            {
+                return;
+            }
+            else
+            {
+                //Attach to moving platform.
+                grapple_Stick_To_Wall.isAttachedToAnObject = true;
+            }
+            //Detect specific script object
+
+          
+
         }
+
         //Remove force from the player.
         origin.AddForce(Vector3.zero);
         //Remove force from the rope. 
         velocity = Vector2.zero;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == layerToGrab)
+        {
+            //Incase there is no grapple_Stick_to_wall script attached to the object we are hitting, return null. 
+            if (grapple_Stick_To_Wall == null)
+            {
+                return;
+            }
+            else
+            {
+                //Get ref from hit target.
+                grapple_Stick_To_Wall = collision.GetComponent<Grapple_Stick_To_Wall>();
+                //Attach to moving platform.
+                grapple_Stick_To_Wall.isAttachedToAnObject = false;
+            }
+        }
     }
 }

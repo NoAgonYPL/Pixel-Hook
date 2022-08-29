@@ -7,21 +7,29 @@ public class RopeSetter : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] int layerToGrab;
     public bool playerCantGrapple;
-    // Update is called once per frame
+    public bool canGrab = false;
+
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !playerCantGrapple)
+        GrapplingHook();
+    }
+
+    void GrapplingHook()
+    {
+        if (Input.GetButtonDown("Fire1") && !playerCantGrapple)
         {
-            Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            rope.setStart(worldPos);
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Debug.DrawRay(player.transform.position, worldPoint, Color.yellow);
+            rope.setStart(worldPoint);
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        if (Input.GetButtonUp("Fire1"))
         {
             rope.DisableRope();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
             rope.DisableRope();
         }

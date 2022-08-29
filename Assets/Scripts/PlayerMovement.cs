@@ -58,14 +58,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        PlayerWalking();
+    }
+
+    void PlayerWalking()
+    {
         //Declare the velocity the player will be moving in.
         horizontal = rb.velocity.x;
 
         //Get the axis the player is moving in.
         horizontal += Input.GetAxisRaw("Horizontal");
-        
+
         //damping when stopped horizontal math
-        if(Mathf.Abs(Input.GetAxisRaw("Horizontal")) < 0.01f)
+        if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) < 0.01f)
         {
             horizontal *= Mathf.Pow(1f - dampingWhenStopped, Time.deltaTime * speed);
         }
@@ -79,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //Multiply the horizontal axis with a damping power to get proper acceleration.
             horizontal *= Mathf.Pow(1f - horizontalDamping, Time.deltaTime * speed);
-        }     
+        }
         //Move the player in the horizontal axis if they use the horizontal keybindings.
         rb.velocity = new Vector2(horizontal, rb.velocity.y);
     }
