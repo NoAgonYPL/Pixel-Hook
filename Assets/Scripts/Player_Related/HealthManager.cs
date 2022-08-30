@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class HealthManager : MonoBehaviour
@@ -26,6 +27,11 @@ public class HealthManager : MonoBehaviour
     private Vector3 respawnPoint;
     //How long it takes to respawn.
     public float respawnLength;
+    public Image blackScreen;
+    private bool isFadeToBlack;
+    private bool isFadeFromBlack;
+    [SerializeField] float fadeSpeed;
+    [SerializeField] float waitForFade;
 
     void Start()
     {
@@ -56,6 +62,29 @@ public class HealthManager : MonoBehaviour
             if(invincibilityCounter <= 0)
             {
                 playerRend.enabled = true;
+            }
+        }
+
+        if (isFadeToBlack)
+        {
+            //Fade the alpha color to black, a.k.a Alpha value 1 or 255. 
+            blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, Mathf.MoveTowards(blackScreen.color.a, 1f, fadeSpeed * Time.deltaTime));
+
+            //Stop fading to black. 
+            if(blackScreen.color.a == 1f)
+            {
+                isFadeToBlack = false;
+            }
+        }
+        if (isFadeFromBlack)
+        {
+            //Fade the alpha color to transparent, a.k.a Alpha value 0. 
+            blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, Mathf.MoveTowards(blackScreen.color.a, 0f, fadeSpeed * Time.deltaTime));
+
+            //Stop fading to white. 
+            if (blackScreen.color.a == 0f)
+            {
+                isFadeFromBlack = false;
             }
         }
     }
@@ -117,9 +146,18 @@ public class HealthManager : MonoBehaviour
 
         //Disable the player.
         thePlayer.SetActive(false);
+        //Death effect here:
 
-        //After X amount of seconds. Do something else.  
+        //Start fade out to black.
         yield return new WaitForSeconds(respawnLength);
+
+        isFadeToBlack = true;
+
+        //Start fade in.
+        yield return new WaitForSeconds(waitForFade);
+
+        isFadeToBlack = false;   //Makes sure it allways goes bright. 
+        isFadeFromBlack = true;
 
         //Invincibility is back on for now/////////////
        
@@ -137,5 +175,10 @@ public class HealthManager : MonoBehaviour
         thePlayer.transform.position = respawnPoint; //Set the position of the player to the latest respawnpoint.
 
         currentHealth = maxHealth;  //Restore health:
+    }
+
+    public void SetSpawnPoint(Vector3 respawnPos)
+    {
+        respawnPoint = respawnPos;
     }
 }
