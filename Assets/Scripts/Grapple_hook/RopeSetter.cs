@@ -8,8 +8,6 @@ public class RopeSetter : MonoBehaviour
     [SerializeField] int layerToGrab;
     public bool playerCantGrapple;
     public bool canGrab = false;
-
-
     void Update()
     {
         GrapplingHook();
