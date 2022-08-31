@@ -2620,7 +2620,7 @@ MonoBehaviour:
   origin: {fileID: 1986060260}
   hook: {fileID: 806645205}
   circleCollider: {fileID: 1599602627}
-  miniHookDistance: 0.5
+  miniOffSetDistance: 1
   ropeSetter: {fileID: 540970038}
   targetIsGrabbed: 0
   speed: 30
@@ -2861,7 +2861,6 @@ GameObject:
   - component: {fileID: 1681027564}
   - component: {fileID: 1681027563}
   - component: {fileID: 1681027562}
-  - component: {fileID: 1681027566}
   m_Layer: 12
   m_Name: Rigidbody_Box
   m_TagString: Untagged
@@ -2885,7 +2884,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7e7f592eb2e855646ad1bed98ea01f7b, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -2983,20 +2982,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1681027566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1681027561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 148bb5eff8cf5ee4486228337b59133a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grab_Rope_Ref: {fileID: 0}
-  thisBox2D: {fileID: 0}
 --- !u!1 &1700788038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3787,6 +3772,18 @@ PrefabInstance:
     - target: {fileID: 7541944338221035643, guid: b741515b64587c6468b332785504a00a, type: 3}
       propertyPath: m_Name
       value: Door_Hinge
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541944338618847614, guid: b741515b64587c6468b332785504a00a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541944338618847614, guid: b741515b64587c6468b332785504a00a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.4999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541944338618847614, guid: b741515b64587c6468b332785504a00a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 7541944338618847615, guid: b741515b64587c6468b332785504a00a, type: 3}
       propertyPath: m_Layer
