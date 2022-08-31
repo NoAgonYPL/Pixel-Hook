@@ -10,13 +10,13 @@ public class Damage_Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Incase you want this object to be lava. 
-        if (collision.tag == "Player" && instaKillOn)
+        if (collision.tag.Equals("Player") && instaKillOn)
         {
             healthManager.isRespawning = false;
             healthManager.Respawn();
         }
         //Normal damage.
-        else if (collision.tag == "Player")
+        else if (collision.tag.Equals("Player"))
         {
             healthManager.HurtPlayer(damage);
         }

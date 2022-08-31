@@ -7,9 +7,9 @@ public class PlayerMovement : MonoBehaviour
     public float jumpPower = 20f;
     public float cutJumpHeight = 0.5f;
     float jumpTimer;
-    float jumpRemmeberTime = 0.2f;
+    [SerializeField]float jump_Remmeber_Time = 0.2f;
     float groundedTimer;
-    float groundedRemmeberTime = 0.2f;
+    [SerializeField] float grounded_Remmeber_Time = 0.2f;
     [SerializeField] float horizontalDamping = 0.5f;
     [SerializeField] float dampingWhenStopped = 0.2f;
     [SerializeField] float dampingWhenTurning = 0.1f;
@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayerMask;
-    [SerializeField] Rope rope;
+    [SerializeField] Rope_Towards rope;
 
     // Update is called once per frame
     void Update()
@@ -31,13 +31,13 @@ public class PlayerMovement : MonoBehaviour
         groundedTimer -= Time.deltaTime;
         if (IsGrounded())
         {
-            groundedTimer = groundedRemmeberTime;
+            groundedTimer = grounded_Remmeber_Time;
         }
         //Jump timer
         jumpTimer -= Time.deltaTime;
         if (Input.GetButtonDown("Jump"))
         {
-            jumpTimer = jumpRemmeberTime;
+            jumpTimer = jump_Remmeber_Time;
         }
         //Jump
         if(jumpTimer > 0 && (groundedTimer > 0))

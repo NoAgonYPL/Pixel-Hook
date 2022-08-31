@@ -13,7 +13,8 @@ public class HealthManager : MonoBehaviour
     //For disabling the player.
     [SerializeField] GameObject thePlayer;
     //For disabling the rope.
-    [SerializeField] Rope rope;
+    [SerializeField] Rope_Towards rope_Towards;
+    [SerializeField] Grab_Rope rope_Grab;
 
     //The invincibility flashing variebales:
     public float invincibilityLength = 2;
@@ -95,7 +96,8 @@ public class HealthManager : MonoBehaviour
         if(invincibilityCounter <= 0)
         {
             currentHealth -= damage;
-            rope.DisableRope();
+            rope_Towards.DisableRope();
+            rope_Grab.DisableRope();
 
             //Call respawn function if health is 0 or less. 
             if(currentHealth <= 0)
@@ -131,7 +133,8 @@ public class HealthManager : MonoBehaviour
         //If we are not allready respawning
         if (!isRespawning)
         {
-            rope.DisableRope();  //Makes sure that we don't have a random rope staying behind if we would die to something that onehits. 
+            rope_Towards.DisableRope();  //Makes sure that we don't have a random rope staying behind if we would die to something that onehits. 
+            rope_Grab.DisableRope(); //Makes sure that we don't have a random grabbed rope staying behind if we would die to something. 
             StartCoroutine(RespawnCO()); //Start the respawning corutine. 
         }
     }
@@ -177,6 +180,7 @@ public class HealthManager : MonoBehaviour
         currentHealth = maxHealth;  //Restore health:
     }
 
+    //Set a new spawnpoint (Called in CheckPointController script).
     public void SetSpawnPoint(Vector3 respawnPos)
     {
         respawnPoint = respawnPos;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Rope : MonoBehaviour
+public class Rope_Towards : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Ref to different components.")]
@@ -31,7 +31,7 @@ public class Rope : MonoBehaviour
         circleCollider.enabled = false;
         hook.SetActive(false);
     }
-    public void setStart(Vector2 targetPos)
+    public void SetStart(Vector2 targetPos)
     {
             line.enabled = true;
             //Direction the player will be pulled towards. 
