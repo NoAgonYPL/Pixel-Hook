@@ -40,7 +40,7 @@ public class CheckPointController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag.Equals("Player") || collision.tag.Equals ("Hook"))
+        if(collision.tag.Equals("Player") || collision.tag.Equals ("Hook") || collision.tag.Equals("Grab"))
         {
             theHealthManager.SetSpawnPoint(transform.position);
             CheckPointOn();

@@ -433,7 +433,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!61 &328780227
 BoxCollider2D:
@@ -544,7 +544,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 11.604}
 --- !u!61 &344452206
 BoxCollider2D:
@@ -780,7 +780,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 750393225}
-  - {fileID: 1056362249}
   - {fileID: 741062920}
   - {fileID: 817327749}
   - {fileID: 1273161604}
@@ -796,7 +795,7 @@ Transform:
   - {fileID: 1966476685}
   - {fileID: 344452205}
   m_Father: {fileID: 1401690759}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &540970037
 GameObject:
@@ -897,7 +896,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &563783472
 BoxCollider2D:
@@ -1039,7 +1038,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -95}
 --- !u!61 &701253161
 BoxCollider2D:
@@ -1181,7 +1180,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -50}
 --- !u!61 &741062921
 BoxCollider2D:
@@ -1548,7 +1547,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &817327750
 BoxCollider2D:
@@ -1659,7 +1658,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!61 &943247375
 BoxCollider2D:
@@ -1739,6 +1738,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1011991614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7541944338618847615, guid: b741515b64587c6468b332785504a00a, type: 3}
+  m_PrefabInstance: {fileID: 7541944339630708033}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1011991619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011991614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2beef50ad8a70c34880aee3ad377ed88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorGameObject: {fileID: 1056362248}
 --- !u!1 &1014650491
 GameObject:
   m_ObjectHideFlags: 0
@@ -1875,8 +1892,9 @@ GameObject:
   - component: {fileID: 1056362249}
   - component: {fileID: 1056362251}
   - component: {fileID: 1056362250}
+  - component: {fileID: 1056362252}
   m_Layer: 9
-  m_Name: Square (1)
+  m_Name: Deactive Door
   m_TagString: GrappeBaleTerrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1894,8 +1912,8 @@ Transform:
   m_LocalScale: {x: 3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 525430964}
-  m_RootOrder: 1
+  m_Father: {fileID: 1401690759}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!61 &1056362250
 BoxCollider2D:
@@ -1975,6 +1993,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1056362252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056362248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2f696241e7bd44091d25dff9282d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1059365098
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,7 +2036,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1059365100
 BoxCollider2D:
@@ -2218,7 +2248,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1273161605
 BoxCollider2D:
@@ -2326,6 +2356,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1056362249}
   - {fileID: 525430964}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2361,7 +2392,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!61 &1443357922
 BoxCollider2D:
@@ -2472,7 +2503,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -48.396}
 --- !u!61 &1481533617
 BoxCollider2D:
@@ -2598,7 +2629,7 @@ GameObject:
   - component: {fileID: 1599602625}
   m_Layer: 7
   m_Name: Grab_Rope_Handler
-  m_TagString: Hook
+  m_TagString: Grab
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3013,7 +3044,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
 --- !u!61 &1700788040
 BoxCollider2D:
@@ -3284,7 +3315,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -95}
 --- !u!61 &1966476686
 BoxCollider2D:
@@ -3403,9 +3434,9 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1986060261
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3569,7 +3600,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525430964}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!61 &2053960867
 BoxCollider2D:
@@ -3773,6 +3804,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door_Hinge
       objectReference: {fileID: 0}
+    - target: {fileID: 7541944338618847488, guid: b741515b64587c6468b332785504a00a, type: 3}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7541944338618847614, guid: b741515b64587c6468b332785504a00a, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -3788,6 +3823,22 @@ PrefabInstance:
     - target: {fileID: 7541944338618847615, guid: b741515b64587c6468b332785504a00a, type: 3}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541944339294936177, guid: b741515b64587c6468b332785504a00a, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.7499998
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541944339294936177, guid: b741515b64587c6468b332785504a00a, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.0000000059624186
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541944339294936177, guid: b741515b64587c6468b332785504a00a, type: 3}
+      propertyPath: m_AngleLimits.m_LowerAngle
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541944339294936177, guid: b741515b64587c6468b332785504a00a, type: 3}
+      propertyPath: m_AngleLimits.m_UpperAngle
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b741515b64587c6468b332785504a00a, type: 3}

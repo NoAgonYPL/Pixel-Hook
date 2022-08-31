@@ -68,7 +68,7 @@ public class Grab_Rope : MonoBehaviour
             dir = dir.normalized;
 
             //Create a variebale that checks the distance between the grabbed object and the player's position.
-            float distance = Vector2.Distance(transform.position, target.position);
+            float distance = Vector2.Distance(origin.position, target.position);
 
             //Pulls the object towards the player.
             if (target)
@@ -78,8 +78,8 @@ public class Grab_Rope : MonoBehaviour
 
                 if(distance >= miniOffSetDistance)
                 {
-                    offSet = target.position - (Vector2)transform.position;
-                    offSet *= offSetDistance;
+                    target.AddForce(Vector3.zero);
+                    velocity = Vector3.zero;
                 }
             }
 
