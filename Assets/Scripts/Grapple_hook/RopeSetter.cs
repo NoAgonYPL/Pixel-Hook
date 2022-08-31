@@ -18,7 +18,7 @@ public class RopeSetter : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && !playerCantGrapple)
         {
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Debug.DrawRay(player.transform.position, worldPoint, Color.yellow);
             rope.SetStart(worldPoint);
         }
@@ -36,7 +36,7 @@ public class RopeSetter : MonoBehaviour
         if (Input.GetButtonDown("Fire2"))
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-           
+
             rope_Grab.SetStart(worldPoint);
         }
 

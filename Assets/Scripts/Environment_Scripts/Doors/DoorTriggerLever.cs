@@ -7,8 +7,7 @@ public class DoorTriggerLever : MonoBehaviour
     [SerializeField] private GameObject doorGameObject;
     private Idoor door;
     //Tracks the time of the lever.
-    private float timer;
-
+    [SerializeField] float timer;
 
     private void Awake()
     {
@@ -17,11 +16,11 @@ public class DoorTriggerLever : MonoBehaviour
 
     private void Update()
     {
-        if(timer < 0)
+        if(timer > 0)
         {
             timer -= Time.deltaTime;
         }
-        else
+        else if (timer <= 0)
         {
             door.CloseDoor();
         }
@@ -29,18 +28,16 @@ public class DoorTriggerLever : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals("Grab"))
+        if (collision.tag.Equals("Lever_Trigger"))
         {
             door.OpenDoor();
-            timer = 1f;
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag.Equals("Grab"))
+        if (collision.tag.Equals("Lever_Trigger"))
         {
-            door.OpenDoor();
             timer = 1f;
         }
     }
