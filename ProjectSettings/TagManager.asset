@@ -9,6 +9,7 @@ TagManager:
   - CheckPoint
   - Hook
   - Grab
+  - Lever_Trigger
   layers:
   - Default
   - TransparentFX
