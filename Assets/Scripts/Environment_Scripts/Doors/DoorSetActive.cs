@@ -5,10 +5,13 @@ using UnityEngine;
 public class DoorSetActive : MonoBehaviour, Idoor 
 {
 
+   
+
     private bool doorIsOpen = false;
 
     public void OpenDoor()
     {
+        
         gameObject.SetActive(false);
     }
 
