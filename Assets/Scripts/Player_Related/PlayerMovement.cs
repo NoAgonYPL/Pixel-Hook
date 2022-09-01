@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         {
             groundedTimer = 0;
             jumpTimer = 0;
+            //Create a rigidbody velocity that 
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
         }
         //Hold jump to jump higher.
@@ -95,3 +96,6 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayerMask);
     }
 }
+
+
+

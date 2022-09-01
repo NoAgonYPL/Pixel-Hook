@@ -11,7 +11,6 @@ public class DoorSetActive : MonoBehaviour, Idoor
 
     public void OpenDoor()
     {
-        
         gameObject.SetActive(false);
     }
 

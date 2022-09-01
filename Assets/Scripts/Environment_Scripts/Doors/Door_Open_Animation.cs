@@ -5,7 +5,6 @@ using UnityEngine;
 public class Door_Open_Animation : MonoBehaviour, Idoor
 {
     [SerializeField] Animator animator;
-    private bool isOpen = false;
 
     private void Awake()
     {
@@ -13,13 +12,11 @@ public class Door_Open_Animation : MonoBehaviour, Idoor
     }
     public void OpenDoor()
     {
-        isOpen = true;
         animator.SetBool("Open", true);
     }
 
     public void CloseDoor()
     {
-        isOpen = false;
         animator.SetBool("Open", false);
     }
 

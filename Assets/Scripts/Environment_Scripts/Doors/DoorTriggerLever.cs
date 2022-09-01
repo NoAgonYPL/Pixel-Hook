@@ -12,27 +12,13 @@ public class DoorTriggerLever : MonoBehaviour
     [Header("The speed the lever rotates back to turning itself off")]
     [SerializeField] float rotateBackSpeed;
     [SerializeField] Transform go_Back_To;
-    [SerializeField] Vector2 dir;
+    Vector2 dir;
 
     private void Awake()
     {
          rb2D = GetComponent<Rigidbody2D>();
+         
          door = doorGameObject.GetComponent<Idoor>(); 
-    }
-
-    private void Update()
-    {
-       
-        //if(timer > 0)
-        //{
-        //    timer -= Time.deltaTime;
-        //}
-
-        //if (timer <= 0)
-        //{
-        //    door.CloseDoor();
-        //}
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -41,7 +27,7 @@ public class DoorTriggerLever : MonoBehaviour
         {
             door.CloseDoor();
 
-            //rb2D.AddForce(Vector2.zero);
+            rb2D.AddForce(Vector2.zero);
             Debug.Log("Door Closed");
         }
     }
@@ -51,6 +37,7 @@ public class DoorTriggerLever : MonoBehaviour
         if (collision.tag.Equals("Lever_Trigger"))
         {
             door.OpenDoor();
+            dir = go_Back_To.transform.position;
             //Rotate back the lever.
             rb2D.AddForce(dir* rotateBackSpeed);
             Debug.Log("Door Open");
