@@ -273,9 +273,8 @@ MonoBehaviour:
   doorGameObject: {fileID: 0}
   rb2D: {fileID: 7541944338618847488}
   timer: 0
-  rotateBackSpeed: 1000
+  rotateBackSpeed: 10
   go_Back_To: {fileID: 1049321653}
-  dir: {x: -2.273737e-13, y: -2}
 --- !u!1 &7541944339294936175
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +397,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.7499998, y: 0.0000000059624186}
+  m_ConnectedAnchor: {x: 0.7499997, y: 0.000000005962305}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0

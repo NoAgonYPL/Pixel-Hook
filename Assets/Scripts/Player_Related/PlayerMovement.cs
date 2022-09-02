@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private float horizontal;
+    private float vertical;
     public float speed = 10f;
     public float jumpPower = 20f;
     public float cutJumpHeight = 0.5f;
@@ -64,11 +65,31 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayerWalking()
     {
-        //Declare the velocity the player will be moving in.
+        //Declare up and down velocity the player will move in when they grapple.
+        vertical = rb.velocity.y;
+        //Declare the left and right velocity the player will be moving in.
         horizontal = rb.velocity.x;
 
         //Get the axis the player is moving in.
         horizontal += Input.GetAxisRaw("Horizontal");
+
+        if (rope.pull)
+        {
+            vertical += Input.GetAxisRaw("Vertical");
+            //damping when stopped vertical math
+            if (Mathf.Abs(Input.GetAxisRaw("Vertical")) < 0.01f)
+            {
+                vertical *= Mathf.Pow(1f - dampingWhenStopped, Time.deltaTime * speed);
+            }
+            //standard damping
+            else
+            {
+                //Multiply the vertical axis with a damping power to get proper acceleration.
+                vertical *= Mathf.Pow(1f - horizontalDamping, Time.deltaTime * speed);
+            }
+            //Move the player in the horizontal axis if they use the vertical keybindings.
+            rb.velocity = new Vector2(rb.velocity.x, vertical);
+        }
 
         //damping when stopped horizontal math
         if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) < 0.01f)
