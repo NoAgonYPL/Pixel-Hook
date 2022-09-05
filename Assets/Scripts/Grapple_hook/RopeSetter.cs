@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 public class RopeSetter : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class RopeSetter : MonoBehaviour
     [SerializeField] int layerToGrab;
     [HideInInspector] public bool playerCantGrapple;
     [HideInInspector] public bool canGrab = false;
+    public Camera playerCam;
     void Update()
     {
         GrapplingHook();
@@ -18,7 +20,7 @@ public class RopeSetter : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && !playerCantGrapple)
         {
-            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 worldPoint = playerCam.ScreenToWorldPoint(Input.mousePosition);
             Debug.DrawRay(player.transform.position, worldPoint, Color.yellow);
             rope.SetStart(worldPoint);
         }
@@ -35,7 +37,7 @@ public class RopeSetter : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2"))
         {
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 worldPoint = playerCam.ScreenToWorldPoint(Input.mousePosition);
 
             rope_Grab.SetStart(worldPoint);
         }
