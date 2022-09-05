@@ -68,9 +68,11 @@ public class Rope_Towards : MonoBehaviour
 
             //Create a variebale that checks the distance between this object and the player's.
             float distance = Vector2.Distance(transform.position, origin.position);
-
-            //origin.AddForce(dir * pull_force);
-
+            if (!Input.GetButton("Vertical"))
+            {
+                origin.AddForce(dir * pull_force);
+            }
+  
             //If the player would be going to far on the hook. 
             if (distance >= maxDistanceAwayFromHook)
             {
@@ -79,17 +81,12 @@ public class Rope_Towards : MonoBehaviour
                 Debug.Log("We are being to far away.");
             }
             //If the player is close to the object.
-            else if(distance <= miniHookDistance)
-            {
-                origin.AddForce(dir * close_By_Force);
-                Debug.Log("We are to close now.");
-            }
-            else if(distance >= miniHookDistance)
-            {
-                //Add a force to the player.
-                origin.AddForce(dir * pull_force);
-                Debug.Log("We are in between.");
-            }
+            //else if(distance <= miniHookDistance)
+            //{
+            //    DisableRope();
+            //    Debug.Log("We are to close now.");
+            //}
+
         }
         else
         {
@@ -125,6 +122,8 @@ public class Rope_Towards : MonoBehaviour
         circleCollider.enabled = false;
         hook.SetActive(false);
         ropeSetter.playerCantGrapple = false;
+        origin.AddForce(Vector2.zero);
+        velocity = Vector2.zero;
     }
 
     //If this object collide with an object. 

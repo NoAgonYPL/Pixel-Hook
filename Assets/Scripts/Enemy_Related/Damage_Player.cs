@@ -5,8 +5,13 @@ using UnityEngine;
 public class Damage_Player : MonoBehaviour
 {
     [SerializeField] int damage = 10;
-    [SerializeField] HealthManager healthManager;
+    HealthManager healthManager;
     [SerializeField] bool instaKillOn;
+
+    private void Awake()
+    {
+        healthManager = FindObjectOfType<HealthManager>().GetComponent<HealthManager>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Incase you want this object to be lava. 

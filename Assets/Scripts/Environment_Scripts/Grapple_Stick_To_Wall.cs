@@ -17,7 +17,6 @@ public class Grapple_Stick_To_Wall : MonoBehaviour
         else
         {
             hookObject.transform.SetParent(null);
-            
         }
     }
 }

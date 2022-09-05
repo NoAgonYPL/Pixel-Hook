@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] Rope_Towards rope;
+    public bool walkingOnGrapplingHook;
 
     // Update is called once per frame
     void Update()
@@ -45,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         {
             groundedTimer = 0;
             jumpTimer = 0;
-            //Create a rigidbody velocity that 
+            //Create a rigidbody velocity that will make the player jump. 
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
         }
         //Hold jump to jump higher.
@@ -79,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
             //damping when stopped vertical math
             if (Mathf.Abs(Input.GetAxisRaw("Vertical")) < 0.01f)
             {
+                walkingOnGrapplingHook = true;
                 vertical *= Mathf.Pow(1f - dampingWhenStopped, Time.deltaTime * speed);
             }
             //standard damping

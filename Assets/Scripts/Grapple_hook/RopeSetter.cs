@@ -11,6 +11,7 @@ public class RopeSetter : MonoBehaviour
     [HideInInspector] public bool playerCantGrapple;
     [HideInInspector] public bool canGrab = false;
     public Camera playerCam;
+
     void Update()
     {
         GrapplingHook();
