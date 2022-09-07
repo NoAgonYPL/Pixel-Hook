@@ -154,7 +154,7 @@ public class Rope_Towards : MonoBehaviour
             {
                 return;
             }
-            else
+            else if (grapple_Stick_To_Wall != null)
             {
                 //Attach to moving platform.
                 grapple_Stick_To_Wall.isAttachedToAnObject = true;
@@ -172,7 +172,7 @@ public class Rope_Towards : MonoBehaviour
             {
                 return;
             }
-            else
+            else if (grapple_Stick_To_Wall != null)
             {
                 //Get ref from hit target.
                 grapple_Stick_To_Wall = collision.GetComponent<Grapple_Stick_To_Wall>();
