@@ -71,7 +71,7 @@ public class Rope_Towards : MonoBehaviour
 
             if (grapple_Stick_To_Wall != null)
             {
-                grapple_Stick_To_Wall.isAttachedToAnObject = true;
+                grapple_Stick_To_Wall.Attach(true);
             }
 
             //Create a variebale that checks the distance between this object and the player's.
@@ -127,7 +127,7 @@ public class Rope_Towards : MonoBehaviour
         velocity = Vector2.zero;
         if(grapple_Stick_To_Wall != null)
         {
-            grapple_Stick_To_Wall.isAttachedToAnObject = false;
+            grapple_Stick_To_Wall.Attach(false);
         }
         
     }
@@ -157,7 +157,7 @@ public class Rope_Towards : MonoBehaviour
             else if (grapple_Stick_To_Wall != null)
             {
                 //Attach to moving platform.
-                grapple_Stick_To_Wall.isAttachedToAnObject = true;
+                grapple_Stick_To_Wall.Attach(true);
             }
         }
         //Remove force from the rope. 
@@ -177,7 +177,7 @@ public class Rope_Towards : MonoBehaviour
                 //Get ref from hit target.
                 grapple_Stick_To_Wall = collision.GetComponent<Grapple_Stick_To_Wall>();
                 //Detach to moving platform.
-                grapple_Stick_To_Wall.isAttachedToAnObject = false;
+                grapple_Stick_To_Wall.Attach(false);
             }
         }
     }

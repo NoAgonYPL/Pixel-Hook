@@ -663,7 +663,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75588506}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.4016457, y: -12.33, z: 0.4349572}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -854,7 +854,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &85275890
 BoxCollider2D:
@@ -1064,7 +1063,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &88891718
 BoxCollider2D:
@@ -2061,7 +2059,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &412160769
 BoxCollider2D:
@@ -2482,7 +2479,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &450016189
 BoxCollider2D:
@@ -3410,7 +3406,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &649441230
 BoxCollider2D:
@@ -5607,7 +5602,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &964144678
 BoxCollider2D:
@@ -6730,7 +6724,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &1113247979
 BoxCollider2D:
@@ -7907,7 +7900,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &1307888215
 BoxCollider2D:
@@ -8016,7 +8008,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329611565}
   m_LocalRotation: {x: -0, y: -0, z: -0.70710677, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.6, y: 0, z: 0}
   m_LocalScale: {x: 4.9976373, y: 5.483945, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10073,7 +10065,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &1556689436
 BoxCollider2D:
@@ -10583,7 +10574,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &1585300422
 BoxCollider2D:
@@ -11354,7 +11344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &1679030955
 BoxCollider2D:
@@ -11591,7 +11580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &1725165647
 BoxCollider2D:
@@ -12159,7 +12147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &1775559755
 BoxCollider2D:
@@ -12951,7 +12938,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &1946646901
 BoxCollider2D:
@@ -13727,7 +13713,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1986060257}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.169998, y: -2.4899979, z: 0}
+  m_LocalPosition: {x: 78.33, y: 4.010002, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14194,7 +14180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba0d2813a61b8a4e8de37006bebc3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttachedToAnObject: 0
   hookObject: {fileID: 75588506}
 --- !u!61 &2067482194
 BoxCollider2D:
