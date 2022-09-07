@@ -14,16 +14,21 @@ public class Rope_Towards : MonoBehaviour
 
     [Header("The travel speed for the grappling hook.")]
     [SerializeField] float speed = 75;
+
     [Header("Grappling hooks dragging power on the player.")]
     [SerializeField] float pull_force = 50;
     [SerializeField] float drag_Back_Force = 7f;
+
     [Header("Stopping force for the hook.")]
     [SerializeField] float close_By_Force = 1;
+
     [Header("Max distance the hook can travel.")]
     [SerializeField] float maxDistance = 20;
     [SerializeField] float miniHookDistance;
+
     [Header("Max distance the player can be from hook impact and itself")]
     [SerializeField] float maxDistanceAwayFromHook = 12;
+
     [Header("Layer that should be grabebale.")]
     [SerializeField] int layerToGrab = 9;
 
@@ -51,12 +56,10 @@ public class Rope_Towards : MonoBehaviour
             circleCollider.enabled = true;
             pull = false;
             hook.SetActive(true);
-       
     }
     // Update is called once per frame
     void Update()
     {
-
         //If the player hit an object with the grappling hook. 
         if (pull)
         {
@@ -65,6 +68,11 @@ public class Rope_Towards : MonoBehaviour
 
             //Normalize the direction to smooth it.
             dir = dir.normalized;
+
+            if (grapple_Stick_To_Wall != null)
+            {
+                grapple_Stick_To_Wall.isAttachedToAnObject = true;
+            }
 
             //Create a variebale that checks the distance between this object and the player's.
             float distance = Vector2.Distance(transform.position, origin.position);
@@ -80,13 +88,6 @@ public class Rope_Towards : MonoBehaviour
                 origin.AddForce(dir * drag_Back_Force);
                 Debug.Log("We are being to far away.");
             }
-            //If the player is close to the object.
-            //else if(distance <= miniHookDistance)
-            //{
-            //    DisableRope();
-            //    Debug.Log("We are to close now.");
-            //}
-
         }
         else
         {
@@ -124,6 +125,11 @@ public class Rope_Towards : MonoBehaviour
         ropeSetter.playerCantGrapple = false;
         origin.AddForce(Vector2.zero);
         velocity = Vector2.zero;
+        if(grapple_Stick_To_Wall != null)
+        {
+            grapple_Stick_To_Wall.isAttachedToAnObject = false;
+        }
+        
     }
 
     //If this object collide with an object. 
@@ -153,15 +159,10 @@ public class Rope_Towards : MonoBehaviour
                 //Attach to moving platform.
                 grapple_Stick_To_Wall.isAttachedToAnObject = true;
             }
-
         }
-
-        //Remove force from the player.
-        //origin.AddForce(Vector3.zero);
         //Remove force from the rope. 
         velocity = Vector2.zero;
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.gameObject.layer == layerToGrab)
@@ -175,7 +176,7 @@ public class Rope_Towards : MonoBehaviour
             {
                 //Get ref from hit target.
                 grapple_Stick_To_Wall = collision.GetComponent<Grapple_Stick_To_Wall>();
-                //Attach to moving platform.
+                //Detach to moving platform.
                 grapple_Stick_To_Wall.isAttachedToAnObject = false;
             }
         }

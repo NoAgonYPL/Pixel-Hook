@@ -6,7 +6,7 @@ public class Stick_To_Platform : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.tag.Equals("Player"))
+        if(collision.collider.tag.Equals("Hook"))
         {
             collision.transform.SetParent(transform);
         }  
@@ -14,7 +14,7 @@ public class Stick_To_Platform : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.tag.Equals("Player"))
+        if (collision.collider.tag.Equals("Hook"))
         {
             collision.transform.SetParent(null);
         }
