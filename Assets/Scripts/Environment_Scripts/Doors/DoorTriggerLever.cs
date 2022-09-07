@@ -7,8 +7,7 @@ public class DoorTriggerLever : MonoBehaviour
     [SerializeField] private GameObject doorGameObject;
     [SerializeField] Rigidbody2D rb2D;
     private Idoor door;
-    //Tracks the time of the lever.
-    [SerializeField] float timer;
+
     [Header("The speed the lever rotates back to turning itself off")]
     [SerializeField] float rotateBackSpeed;
     [SerializeField] Transform go_Back_To;
@@ -38,8 +37,9 @@ public class DoorTriggerLever : MonoBehaviour
         {
             door.OpenDoor();
             dir = go_Back_To.transform.position;
+
             //Rotate back the lever.
-            rb2D.AddForce(dir* rotateBackSpeed);
+            //rb2D.AddForce(dir* rotateBackSpeed);
             Debug.Log("Door Open");
         }
     }
