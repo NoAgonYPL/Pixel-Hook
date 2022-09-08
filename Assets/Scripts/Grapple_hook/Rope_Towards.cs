@@ -12,6 +12,8 @@ public class Rope_Towards : MonoBehaviour
     [SerializeField] RopeSetter ropeSetter;
     Grapple_Stick_To_Wall grapple_Stick_To_Wall;
 
+    [SerializeField] ParticleSystem hitEffect;
+
     [Header("The travel speed for the grappling hook.")]
     [SerializeField] float speed = 75;
 
@@ -125,6 +127,7 @@ public class Rope_Towards : MonoBehaviour
         ropeSetter.playerCantGrapple = false;
         origin.AddForce(Vector2.zero);
         velocity = Vector2.zero;
+
         if(grapple_Stick_To_Wall != null)
         {
             grapple_Stick_To_Wall.Attach(false);
@@ -160,6 +163,11 @@ public class Rope_Towards : MonoBehaviour
                 grapple_Stick_To_Wall.Attach(true);
             }
         }
+        if(collision != null)
+        {
+            hitEffect.Play();
+        }
+
         //Remove force from the rope. 
         velocity = Vector2.zero;
     }

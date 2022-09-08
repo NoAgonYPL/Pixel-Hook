@@ -36,7 +36,7 @@ public class DoorTriggerLever : MonoBehaviour
         if (collision.tag.Equals("Lever_Trigger"))
         {
             door.OpenDoor();
-            dir = go_Back_To.transform.position;
+            dir = go_Back_To.transform.position * rotateBackSpeed * Time.deltaTime;
 
             //Rotate back the lever.
             //rb2D.AddForce(dir* rotateBackSpeed);

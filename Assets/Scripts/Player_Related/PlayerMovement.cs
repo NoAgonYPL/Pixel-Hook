@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] Rope_Towards rope;
+    [SerializeField] ParticleSystem dust;
     public bool walkingOnGrapplingHook;
 
     // Update is called once per frame
@@ -48,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
             jumpTimer = 0;
             //Create a rigidbody velocity that will make the player jump. 
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            CreateDust();
         }
         //Hold jump to jump higher.
         if (Input.GetButtonUp("Jump"))
@@ -70,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         vertical = rb.velocity.y;
         //Declare the left and right velocity the player will be moving in.
         horizontal = rb.velocity.x;
-
+        
         //Get the axis the player is moving in.
         horizontal += Input.GetAxisRaw("Horizontal");
 
@@ -97,26 +99,37 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) < 0.01f)
         {
             horizontal *= Mathf.Pow(1f - dampingWhenStopped, Time.deltaTime * speed);
+            if (IsGrounded())
+                CreateDust();
         }
         //damping when turning
         else if (Mathf.Sign(Input.GetAxisRaw("Horizontal")) != Mathf.Sign(horizontal))
         {
             horizontal *= Mathf.Pow(1f - dampingWhenTurning, Time.deltaTime * speed);
+            if (IsGrounded())
+                CreateDust();
         }
         //standard damping
         else
         {
             //Multiply the horizontal axis with a damping power to get proper acceleration.
             horizontal *= Mathf.Pow(1f - horizontalDamping, Time.deltaTime * speed);
+            
         }
         //Move the player in the horizontal axis if they use the horizontal keybindings.
         rb.velocity = new Vector2(horizontal, rb.velocity.y);
+        
     }
 
     private bool IsGrounded()
     {
         //Return an Collision circle at the groundchecks position and check the groundlayer mask for detection. 
         return Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayerMask);
+    }
+
+    void CreateDust()
+    {
+        dust.Play();
     }
 }
 

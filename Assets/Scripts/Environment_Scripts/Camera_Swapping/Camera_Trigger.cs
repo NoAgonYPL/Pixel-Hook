@@ -24,4 +24,6 @@ public class Camera_Trigger : MonoBehaviour
             Camera.main.orthographicSize = cameraSize;
         }
     }
+
+   
 }

@@ -12,6 +12,8 @@ public class Grab_Rope : MonoBehaviour
     [SerializeField] float miniOffSetDistance;
     [SerializeField] RopeSetter ropeSetter;
 
+    [SerializeField] ParticleSystem hitEffect;
+
     //The object that will be grabbed.  
     private Rigidbody2D target;
     [HideInInspector] public bool targetIsGrabbed;
@@ -144,10 +146,12 @@ public class Grab_Rope : MonoBehaviour
                 offSet = target.position - (Vector2)transform.position;
                 offSet *= offSetDistance;
             }
+        }
 
-            //Detect specific script object
-
-
+        //Play effect
+        if (collision != null)
+        {
+            hitEffect.Play();
         }
 
         //Remove force from the player.
