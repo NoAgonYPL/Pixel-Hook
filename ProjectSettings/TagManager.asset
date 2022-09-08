@@ -10,6 +10,7 @@ TagManager:
   - Hook
   - Grab
   - Lever_Trigger
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -26,8 +27,8 @@ TagManager:
   - GrabTerrain
   - Acid
   - Hinge
-  - 
-  - 
+  - Enemy
+  - Pressure_Plate
   - 
   - 
   - 

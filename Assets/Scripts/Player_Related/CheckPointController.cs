@@ -9,6 +9,7 @@ public class CheckPointController : MonoBehaviour
     [SerializeField] Material cpOff;
     [SerializeField] Material cpOn;
     [SerializeField] HealthManager theHealthManager;
+    [SerializeField] ParticleSystem check_Point_Eff;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,9 @@ public class CheckPointController : MonoBehaviour
         //Turn on this checkpoint material.
         theRend.material = cpOn;
 
+        //Play checkpoint effect.
+        check_Point_Eff.Play();
+        
         
     }
 

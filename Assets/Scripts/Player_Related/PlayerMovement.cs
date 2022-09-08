@@ -99,8 +99,8 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) < 0.01f)
         {
             horizontal *= Mathf.Pow(1f - dampingWhenStopped, Time.deltaTime * speed);
-            if (IsGrounded())
-                CreateDust();
+            
+                
         }
         //damping when turning
         else if (Mathf.Sign(Input.GetAxisRaw("Horizontal")) != Mathf.Sign(horizontal))
