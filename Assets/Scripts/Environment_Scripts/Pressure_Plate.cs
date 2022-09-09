@@ -7,13 +7,25 @@ public class Pressure_Plate : MonoBehaviour
     private Idoor door;
     [SerializeField] bool isPlatformActivator = false;
     [SerializeField] private GameObject doorGameObject;
-    [SerializeField] GameObject activeObject;
-    [SerializeField] GameObject deactiveObject;
+    [SerializeField] List <GameObject> activeObject = new List<GameObject>();
+    [SerializeField] List<GameObject> deactiveObject= new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
         if (!isPlatformActivator)
             door = doorGameObject.GetComponent<Idoor>();
+
+        if (isPlatformActivator)
+        {
+            for (int i = 0; i < activeObject.Count; i++)
+            {
+                activeObject[i].SetActive(false);
+            }
+            for (int i = 0; i < deactiveObject.Count; i++)
+            {
+                deactiveObject[i].SetActive(true);
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -29,8 +41,14 @@ public class Pressure_Plate : MonoBehaviour
         {
             if (collision.tag.Equals("Enemy"))
             {
-                activeObject.SetActive(false);
-                deactiveObject.SetActive(true);
+                for (int i = 0; i < activeObject.Count; i++)
+                {
+                    activeObject[i].SetActive(false);
+                }
+                for (int i = 0; i < deactiveObject.Count; i++)
+                {
+                    deactiveObject[i].SetActive(true);
+                }
             }
         }
 
@@ -49,8 +67,14 @@ public class Pressure_Plate : MonoBehaviour
         {
             if (collision.tag.Equals("Enemy"))
             {
-                activeObject.SetActive(true);
-                deactiveObject.SetActive(false);
+                for (int i = 0; i < activeObject.Count; i++)
+                {
+                    activeObject[i].SetActive(true);
+                }
+                for (int i = 0; i < deactiveObject.Count; i++)
+                {
+                    deactiveObject[i].SetActive(false);
+                }
             }
         }
     }

@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] Rope_Towards rope;
     [SerializeField] ParticleSystem dust;
-    public bool walkingOnGrapplingHook;
+    [HideInInspector] bool walkingOnGrapplingHook;
 
     // Update is called once per frame
     void Update()
