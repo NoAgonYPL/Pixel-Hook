@@ -8,7 +8,7 @@ public class Pressure_Plate : MonoBehaviour
     [SerializeField] bool isPlatformActivator = false;
     [SerializeField] private GameObject doorGameObject;
     [SerializeField] List <GameObject> activeObject = new List<GameObject>();
-    [SerializeField] List<GameObject> deactiveObject= new List<GameObject>();
+    [SerializeField] List <GameObject> deactiveObject= new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
