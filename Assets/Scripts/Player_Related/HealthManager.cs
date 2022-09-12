@@ -33,6 +33,7 @@ public class HealthManager : MonoBehaviour
     private bool isFadeFromBlack;
     [SerializeField] float fadeSpeed;
     [SerializeField] float waitForFade;
+    [SerializeField] AudioSource deathSF;
 
     void Start()
     {
@@ -144,6 +145,9 @@ public class HealthManager : MonoBehaviour
     //This corutine respawns the player and plays some stuff under a specific time window. 
     public IEnumerator RespawnCO()
     {
+        //Death sound effect.
+        deathSF.Play();
+
         //Respawning is now true.
         isRespawning = true;
 

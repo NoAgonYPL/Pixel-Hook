@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Door_Open_Animation : MonoBehaviour, Idoor
 {
     [SerializeField] Animator animator;
+    [SerializeField] AudioSource openSF;
+    [SerializeField] AudioSource closeSF;
+    public bool alreadyPlaying = false;
 
     private void Awake()
     {
@@ -13,11 +14,22 @@ public class Door_Open_Animation : MonoBehaviour, Idoor
     public void OpenDoor()
     {
         animator.SetBool("Open", true);
+        if (!alreadyPlaying)
+        {
+            openSF.Play();
+            alreadyPlaying = true;
+        }
+        
     }
 
     public void CloseDoor()
     {
         animator.SetBool("Open", false);
+        if (alreadyPlaying)
+        {
+            closeSF.Play();
+            alreadyPlaying = false;
+        }
     }
 
     public void ToggleDoor()

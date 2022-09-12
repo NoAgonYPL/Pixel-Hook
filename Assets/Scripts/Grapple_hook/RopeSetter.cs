@@ -11,6 +11,8 @@ public class RopeSetter : MonoBehaviour
     [HideInInspector] public bool playerCantGrapple;
     [HideInInspector] public bool canGrab = false;
     public Camera playerCam;
+    [SerializeField] AudioSource grapplingSF;
+    [SerializeField] AudioSource grabSF;
 
     void Update()
     {
@@ -24,28 +26,32 @@ public class RopeSetter : MonoBehaviour
             Vector3 worldPoint = playerCam.ScreenToWorldPoint(Input.mousePosition);
             Debug.DrawRay(player.transform.position, worldPoint, Color.yellow);
             rope.SetStart(worldPoint);
+            grapplingSF.Play();
         }
 
         if (Input.GetButtonUp("Fire1"))
         {
             rope.DisableRope();
+            grapplingSF.Stop();
         }
 
         if (Input.GetButtonDown("Jump"))
         {
             rope.DisableRope();
+            grapplingSF.Stop();
         }
 
         if (Input.GetButtonDown("Fire2"))
         {
             Vector2 worldPoint = playerCam.ScreenToWorldPoint(Input.mousePosition);
-
+            grabSF.Play();
             rope_Grab.SetStart(worldPoint);
         }
 
         if (Input.GetButtonUp("Fire2"))
         {
             rope_Grab.targetIsGrabbed = false;
+            grabSF.Stop();
             rope_Grab.DisableRope();
         }
     }

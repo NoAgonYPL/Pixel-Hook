@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Rope_Towards rope;
     [SerializeField] ParticleSystem dust;
     [HideInInspector] bool walkingOnGrapplingHook;
+    [SerializeField] AudioSource jumpSF;
 
     // Update is called once per frame
     void Update()
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jumpTimer = jump_Remmeber_Time;
+            
         }
         //Jump
         if(jumpTimer > 0 && (groundedTimer > 0))
@@ -49,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
             jumpTimer = 0;
             //Create a rigidbody velocity that will make the player jump. 
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            jumpSF.Play();
             CreateDust();
         }
         //Hold jump to jump higher.
@@ -124,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         //Return an Collision circle at the groundchecks position and check the groundlayer mask for detection. 
-        return Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayerMask);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.05f, groundLayerMask);
     }
 
     void CreateDust()

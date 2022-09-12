@@ -11,6 +11,8 @@ public class Rope_Towards : MonoBehaviour
     [SerializeField] CircleCollider2D circleCollider;
     [SerializeField] RopeSetter ropeSetter;
     Grapple_Stick_To_Wall grapple_Stick_To_Wall;
+    [SerializeField] AudioSource hitSF;
+    [SerializeField] AudioSource grapplingSF;
 
     [SerializeField] ParticleSystem hitEffect;
 
@@ -99,9 +101,12 @@ public class Rope_Towards : MonoBehaviour
             //Create a variebale that checks the distance between this object and the player's.
             float distance = Vector2.Distance(transform.position, origin.position);
 
+            
+
             //If the rope reaches max distance. 
-            if(distance >= maxDistance)
+            if (distance >= maxDistance)
             {
+                
                 DisableRope();
                 return;
             }
@@ -160,12 +165,14 @@ public class Rope_Towards : MonoBehaviour
             else if (grapple_Stick_To_Wall != null)
             {
                 //Attach to moving platform.
+                hitSF.Play();
                 grapple_Stick_To_Wall.Attach(true);
             }
         }
         if(collision != null)
         {
             hitEffect.Play();
+            
         }
 
         //Remove force from the rope. 

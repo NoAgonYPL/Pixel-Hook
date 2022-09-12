@@ -10,6 +10,7 @@ public class CheckPointController : MonoBehaviour
     [SerializeField] Material cpOn;
     [SerializeField] HealthManager theHealthManager;
     [SerializeField] ParticleSystem check_Point_Eff;
+    [SerializeField] AudioSource checkPointSF;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class CheckPointController : MonoBehaviour
 
         //Play checkpoint effect.
         check_Point_Eff.Play();
+        checkPointSF.Play();
         
         
     }

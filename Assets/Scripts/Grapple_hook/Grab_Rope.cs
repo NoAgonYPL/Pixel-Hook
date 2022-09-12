@@ -11,6 +11,8 @@ public class Grab_Rope : MonoBehaviour
     [SerializeField] CircleCollider2D circleCollider;
     [SerializeField] float miniOffSetDistance;
     [SerializeField] RopeSetter ropeSetter;
+    [SerializeField] AudioSource hitSF;
+    [SerializeField] AudioSource grapplingSF;
 
     [SerializeField] ParticleSystem hitEffect;
 
@@ -94,6 +96,8 @@ public class Grab_Rope : MonoBehaviour
             //Create a variebale that checks the distance between this object and the player's.
             float distance = Vector2.Distance(transform.position, origin.position);
 
+            
+
             //If the rope reaches max distance. 
             if (distance >= maxDistance)
             {
@@ -140,9 +144,12 @@ public class Grab_Rope : MonoBehaviour
             //Connects the target to the grappling hook. 
             target = collision.attachedRigidbody;
 
+            
+
             //Make an offset, so that the objects don't enter each other and cause chaos. 
             if (target)
             {
+                hitSF.Play();
                 offSet = target.position - (Vector2)transform.position;
                 offSet *= offSetDistance;
             }
