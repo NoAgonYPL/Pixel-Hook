@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] Rope_Towards rope;
     [SerializeField] ParticleSystem dust;
-    [HideInInspector] bool walkingOnGrapplingHook;
+
     [SerializeField] AudioSource jumpSF;
 
     // Update is called once per frame
@@ -85,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
             //damping when stopped vertical math
             if (Mathf.Abs(Input.GetAxisRaw("Vertical")) < 0.01f)
             {
-                walkingOnGrapplingHook = true;
                 vertical *= Mathf.Pow(1f - dampingWhenStopped, Time.deltaTime * speed);
             }
             //standard damping

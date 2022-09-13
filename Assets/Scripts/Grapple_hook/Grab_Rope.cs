@@ -13,6 +13,7 @@ public class Grab_Rope : MonoBehaviour
     [SerializeField] RopeSetter ropeSetter;
     [SerializeField] AudioSource hitSF;
     [SerializeField] AudioSource grapplingSF;
+    Grapple_Stick_To_Wall grapple_Stick_To_Wall;
 
     [SerializeField] ParticleSystem hitEffect;
 
@@ -22,12 +23,16 @@ public class Grab_Rope : MonoBehaviour
 
     [Header("The travel speed for the grappling hook.")]
     [SerializeField] float speed = 75;
+
     [Header("Grappling hooks dragging power on the grabbed object.")]
     [SerializeField] float grab_Force = 50;
+
     [Header("Max distance the hook can travel.")]
     [SerializeField] float maxDistance = 20;
+
     [Header("Layer that should be grabebale.")]
     [SerializeField] int layerToGrab = 9;
+
     Vector2 offSet;
     [SerializeField] float offSetDistance = 0.5f; 
 
@@ -58,8 +63,15 @@ public class Grab_Rope : MonoBehaviour
         hook.SetActive(true);
 
     }
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
+    {
+        //Draw a line from this object and the player. 
+        line.SetPosition(0, transform.position);
+        line.SetPosition(1, origin.position);
+    }
+
+    void FixedUpdate()
     {
         
         //If the player hit an object with the grappling hook. 
@@ -90,13 +102,12 @@ public class Grab_Rope : MonoBehaviour
         }
         else
         {
+
             //Fire the rope. 
             transform.position += velocity * Time.deltaTime;
 
             //Create a variebale that checks the distance between this object and the player's.
             float distance = Vector2.Distance(transform.position, origin.position);
-
-            
 
             //If the rope reaches max distance. 
             if (distance >= maxDistance)
@@ -105,10 +116,6 @@ public class Grab_Rope : MonoBehaviour
                 return;
             }
         }
-
-        //Draw a line from this object and the player. 
-        line.SetPosition(0, transform.position);
-        line.SetPosition(1, origin.position);
     }
 
     //Disable the rope
@@ -125,11 +132,17 @@ public class Grab_Rope : MonoBehaviour
         circleCollider.enabled = false;
         hook.SetActive(false);
         ropeSetter.playerCantGrapple = false;
+
+        if (grapple_Stick_To_Wall != null)
+        {
+            grapple_Stick_To_Wall.Attach(false);
+        }
     }
 
     //If this object collide with an object. 
     void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (collision.gameObject.layer == layerToGrab)
         {
             //Remove force from the player.
@@ -143,8 +156,6 @@ public class Grab_Rope : MonoBehaviour
 
             //Connects the target to the grappling hook. 
             target = collision.attachedRigidbody;
-
-            
 
             //Make an offset, so that the objects don't enter each other and cause chaos. 
             if (target)

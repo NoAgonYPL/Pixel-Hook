@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Rope_Towards : MonoBehaviour
@@ -13,6 +16,10 @@ public class Rope_Towards : MonoBehaviour
     Grapple_Stick_To_Wall grapple_Stick_To_Wall;
     [SerializeField] AudioSource hitSF;
     [SerializeField] AudioSource grapplingSF;
+    Vector2 playerPos;
+
+    float distance;
+    [HideInInspector] public bool retracting;
 
     [SerializeField] ParticleSystem hitEffect;
 
@@ -23,18 +30,15 @@ public class Rope_Towards : MonoBehaviour
     [SerializeField] float pull_force = 50;
     [SerializeField] float drag_Back_Force = 7f;
 
-    [Header("Stopping force for the hook.")]
-    [SerializeField] float close_By_Force = 1;
-
     [Header("Max distance the hook can travel.")]
     [SerializeField] float maxDistance = 20;
-    [SerializeField] float miniHookDistance;
 
     [Header("Max distance the player can be from hook impact and itself")]
     [SerializeField] float maxDistanceAwayFromHook = 12;
 
     [Header("Layer that should be grabebale.")]
     [SerializeField] int layerToGrab = 9;
+
 
     //The velocity of the hook.
     private Vector3 velocity;
@@ -44,7 +48,9 @@ public class Rope_Towards : MonoBehaviour
     {
         circleCollider.enabled = false;
         hook.SetActive(false);
+        DisableRope();
     }
+
     public void SetStart(Vector2 targetPos)
     {
             line.enabled = true;
@@ -55,12 +61,14 @@ public class Rope_Towards : MonoBehaviour
             velocity = dir * speed;
             //This objects transform.position should be the player's position + the direction the rope is going in. 
             transform.position = origin.position + dir;
-
+            retracting = false;
             //Enabling and disabling variebales:
             circleCollider.enabled = true;
             pull = false;
             hook.SetActive(true);
     }
+
+    
     // Update is called once per frame
     void Update()
     {
@@ -79,41 +87,50 @@ public class Rope_Towards : MonoBehaviour
             }
 
             //Create a variebale that checks the distance between this object and the player's.
-            float distance = Vector2.Distance(transform.position, origin.position);
+            distance = Vector2.Distance(transform.position, origin.position);
             if (!Input.GetButton("Vertical"))
             {
-                origin.AddForce(dir * pull_force);
+                origin.AddForce(dir * pull_force * Time.deltaTime);
             }
-  
+            
             //If the player would be going to far on the hook. 
             if (distance >= maxDistanceAwayFromHook)
             {
                 //Remove force from the player.
                 origin.AddForce(dir * drag_Back_Force);
-                Debug.Log("We are being to far away.");
             }
         }
         else
         {
-            //Fire the rope. 
-            transform.position += velocity * Time.deltaTime;
-
+            if (!retracting)
+            {
+                //Fire the rope. 
+                transform.position += velocity * Time.deltaTime;
+            }
+           
             //Create a variebale that checks the distance between this object and the player's.
-            float distance = Vector2.Distance(transform.position, origin.position);
-
-            
+            distance = Vector2.Distance(transform.position, origin.position);
 
             //If the rope reaches max distance. 
             if (distance >= maxDistance)
             {
-                
-                DisableRope();
-                return;
+                playerPos = origin.transform.position;
+                //Do retract code here: 
+                //Then we can make it an function.
+                retracting = true;
+                //gameObject.transform.Translate(playerPos * speed * Time.deltaTime);
+
+                if (distance <= 0)
+                {
+                    DisableRope();
+                    return;
+                }
             }
         }
         //Draw a line from this object and the player. 
         line.SetPosition(0, transform.position);
         line.SetPosition(1, origin.position);
+
     }
 
     //Disable the rope
@@ -127,6 +144,7 @@ public class Rope_Towards : MonoBehaviour
         line.SetPosition(1, Vector3.zero);
 
         //Enabling and disabling variebales:
+        retracting = false;
         circleCollider.enabled = false;
         hook.SetActive(false);
         ropeSetter.playerCantGrapple = false;
@@ -173,6 +191,11 @@ public class Rope_Towards : MonoBehaviour
         {
             hitEffect.Play();
             
+        }
+        if(collision.gameObject.layer != layerToGrab)
+        {
+            DisableRope();
+            return;
         }
 
         //Remove force from the rope. 

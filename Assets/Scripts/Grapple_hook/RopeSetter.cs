@@ -24,7 +24,6 @@ public class RopeSetter : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !playerCantGrapple)
         {
             Vector3 worldPoint = playerCam.ScreenToWorldPoint(Input.mousePosition);
-            Debug.DrawRay(player.transform.position, worldPoint, Color.yellow);
             rope.SetStart(worldPoint);
             grapplingSF.Play();
         }

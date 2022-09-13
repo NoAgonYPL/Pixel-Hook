@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class Restart_Level : MonoBehaviour
 {
     [SerializeField] string sceneName;
-  
 
     public void RestartLevel()
     {
