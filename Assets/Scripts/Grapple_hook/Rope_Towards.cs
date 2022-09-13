@@ -16,12 +16,14 @@ public class Rope_Towards : MonoBehaviour
     Grapple_Stick_To_Wall grapple_Stick_To_Wall;
     [SerializeField] AudioSource hitSF;
     [SerializeField] AudioSource grapplingSF;
-    Vector2 playerPos;
 
     float distance;
     [HideInInspector] public bool retracting;
 
+    [Header("When the hook hits a collision.")]
     [SerializeField] ParticleSystem hitEffect;
+    [Header("When the hook disapears.")]
+    [SerializeField] ParticleSystem vanishEffect;
 
     [Header("The travel speed for the grappling hook.")]
     [SerializeField] float speed = 75;
@@ -102,11 +104,9 @@ public class Rope_Towards : MonoBehaviour
         }
         else
         {
-            if (!retracting)
-            {
-                //Fire the rope. 
-                transform.position += velocity * Time.deltaTime;
-            }
+            //Fire the rope.
+            if(!retracting)
+            transform.position += velocity * Time.deltaTime;
            
             //Create a variebale that checks the distance between this object and the player's.
             distance = Vector2.Distance(transform.position, origin.position);
@@ -114,16 +114,15 @@ public class Rope_Towards : MonoBehaviour
             //If the rope reaches max distance. 
             if (distance >= maxDistance)
             {
-                playerPos = origin.transform.position;
-                //Do retract code here: 
-                //Then we can make it an function.
-                retracting = true;
-                //gameObject.transform.Translate(playerPos * speed * Time.deltaTime);
+                //playerPos = origin.transform.position;
+                //transform.position = Vector2.Lerp(transform.position, origin.transform.position, speed * Time.deltaTime);
+                DisableRope();
+                return;
+                //retracting = true;
 
-                if (distance <= 0)
+                if (distance == 0)
                 {
-                    DisableRope();
-                    return;
+                  
                 }
             }
         }
@@ -138,7 +137,7 @@ public class Rope_Towards : MonoBehaviour
     {
         pull = false;
         line.enabled = false;
-
+        vanishEffect.Play();
         //Reset the line's position
         line.SetPosition(0, Vector3.zero);
         line.SetPosition(1, Vector3.zero);
