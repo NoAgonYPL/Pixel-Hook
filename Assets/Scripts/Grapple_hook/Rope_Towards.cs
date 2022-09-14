@@ -16,6 +16,8 @@ public class Rope_Towards : MonoBehaviour
     Grapple_Stick_To_Wall grapple_Stick_To_Wall;
     [SerializeField] AudioSource hitSF;
     [SerializeField] AudioSource grapplingSF;
+    [SerializeField] Animator retractingAnimController;
+    [SerializeField] Animation retractAnimation;
 
     float distance;
     [HideInInspector] public bool retracting;
@@ -40,6 +42,9 @@ public class Rope_Towards : MonoBehaviour
 
     [Header("Layer that should be grabebale.")]
     [SerializeField] int layerToGrab = 9;
+
+    [Header("How long the animation will last for.")]
+    [SerializeField] float retractLength; 
 
 
     //The velocity of the hook.
@@ -105,19 +110,18 @@ public class Rope_Towards : MonoBehaviour
         }
         else
         {
-            //Fire the rope.
-            if(!retracting)
+            
             transform.position += velocity * Time.deltaTime;
            
             //Create a variebale that checks the distance between this object and the player's.
             distance = Vector2.Distance(transform.position, origin.position);
 
             //If the rope reaches max distance. 
-            if (distance >= maxDistance)
+            if (distance >= maxDistance && !pull)
             {
                 //playerPos = origin.transform.position;
                 //transform.position = Vector2.Lerp(transform.position, origin.transform.position, speed * Time.deltaTime);
-                DisableRope();
+                Retracting();
                 return;
                 //retracting = true;
             }
@@ -126,20 +130,41 @@ public class Rope_Towards : MonoBehaviour
         line.SetPosition(0, transform.position);
         line.SetPosition(1, origin.position);
 
+        
+        if (retracting && !pull)
+        {
+            retractAnimation.Play();
+            //Retract to false when animation has played. 
+        }
+
     }
+
+    public void Retracting()
+    {
+        if (!retractAnimation.IsPlaying("Retracting"))
+        {
+            DisableRope();
+        }
+        else
+        {
+            retracting = true;
+        }
+        //Do something when the animation is complete
+    }
+
 
     //Disable the rope
     public void DisableRope()
     {
         pull = false;
         line.enabled = false;
-        vanishEffect.Play();
         //Reset the line's position
         line.SetPosition(0, Vector3.zero);
         line.SetPosition(1, Vector3.zero);
 
         //Enabling and disabling variebales:
         retracting = false;
+        
         circleCollider.enabled = false;
         hook.SetActive(false);
         ropeSetter.playerCantGrapple = false;
