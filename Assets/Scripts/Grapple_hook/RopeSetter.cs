@@ -8,7 +8,7 @@ public class RopeSetter : MonoBehaviour
     [SerializeField] float distanceFromPlayer;
     [SerializeField] GameObject player;
     [SerializeField] int layerToGrab;
-    [HideInInspector] public bool playerCantGrapple;
+    public bool playerCantGrapple = false;
     [HideInInspector] public bool canGrab = false;
     public Camera playerCam;
     [SerializeField] AudioSource grapplingSF;
@@ -24,14 +24,9 @@ public class RopeSetter : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !playerCantGrapple)
         {
             Vector3 worldPoint = playerCam.ScreenToWorldPoint(Input.mousePosition);
+            playerCantGrapple = true;
             rope.SetStart(worldPoint);
             grapplingSF.Play();
-        }
-
-        if (Input.GetButtonUp("Fire1"))
-        {
-            rope.DisableRope();
-            grapplingSF.Stop();
         }
 
         if (Input.GetButtonDown("Jump"))
@@ -53,17 +48,5 @@ public class RopeSetter : MonoBehaviour
             grabSF.Stop();
             rope_Grab.DisableRope();
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.layer == layerToGrab)
-        {
-            playerCantGrapple = true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        playerCantGrapple = false;
     }
 }

@@ -58,6 +58,7 @@ public class Rope_Towards : MonoBehaviour
             line.enabled = true;
             //Direction the player will be pulled towards. 
             Vector2 dir = targetPos - origin.position;
+            ropeSetter.playerCantGrapple = true;
             dir = dir.normalized;
             //Add speed to the velocity variebale.
             velocity = dir * speed;
@@ -119,11 +120,6 @@ public class Rope_Towards : MonoBehaviour
                 DisableRope();
                 return;
                 //retracting = true;
-
-                if (distance == 0)
-                {
-                  
-                }
             }
         }
         //Draw a line from this object and the player. 
