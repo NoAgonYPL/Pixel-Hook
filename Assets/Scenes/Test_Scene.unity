@@ -1197,6 +1197,8 @@ MonoBehaviour:
   ropeSetter: {fileID: 540970038}
   hitSF: {fileID: 75588513}
   grapplingSF: {fileID: 0}
+  retractingAnimController: {fileID: 0}
+  retractAnimation: {fileID: 1923484011}
   retracting: 0
   hitEffect: {fileID: 1106114366}
   vanishEffect: {fileID: 763504406}
@@ -1206,6 +1208,7 @@ MonoBehaviour:
   maxDistance: 8
   maxDistanceAwayFromHook: 2
   layerToGrab: 9
+  retractLength: 2
   pull: 0
 --- !u!4 &75588508
 Transform:
@@ -1219,7 +1222,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1923484009}
+  - {fileID: 642774908}
   - {fileID: 1106114368}
   - {fileID: 763504404}
   m_Father: {fileID: 0}
@@ -6788,6 +6791,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &642774907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 642774908}
+  m_Layer: 7
+  m_Name: Parent Of edge rope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &642774908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642774907}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1923484009}
+  m_Father: {fileID: 75588508}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &647904472 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4999376370757584045, guid: e2d499112a7fd154d98c4bf57b389729, type: 3}
@@ -8524,7 +8559,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 763504403}
   serializedVersion: 8
-  lengthInSec: 0.1
+  lengthInSec: 0.05
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -38969,6 +39004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1923484009}
   - component: {fileID: 1923484010}
+  - component: {fileID: 1923484011}
   m_Layer: 7
   m_Name: Edge of rope
   m_TagString: Hook
@@ -38983,12 +39019,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923484008}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.4349572}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 75588508}
+  m_Father: {fileID: 642774908}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1923484010
@@ -39043,6 +39079,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &1923484011
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923484008}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 649cf414e9259a84197e104b94d63e3e, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 649cf414e9259a84197e104b94d63e3e, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1929956383
 GameObject:
   m_ObjectHideFlags: 0

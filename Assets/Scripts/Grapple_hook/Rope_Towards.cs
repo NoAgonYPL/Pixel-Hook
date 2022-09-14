@@ -143,7 +143,7 @@ public class Rope_Towards : MonoBehaviour
     {
         if (!retractAnimation.IsPlaying("Retracting"))
         {
-            DisableRope();
+            
         }
         else
         {
@@ -214,7 +214,7 @@ public class Rope_Towards : MonoBehaviour
         }
         if(collision.gameObject.layer != layerToGrab)
         {
-            DisableRope();
+            Retracting();
             return;
         }
 

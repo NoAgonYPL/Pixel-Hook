@@ -33,13 +33,13 @@ public class RopeSetter : MonoBehaviour
         {
             rope_Grab.targetIsGrabbed = false;
             grapplingSF.Stop();
-            rope.DisableRope();
+            rope.Retracting();
         }
 
         if (Input.GetButtonDown("Jump") && !rope.retracting)
         {
             grapplingSF.Stop();
-            rope.DisableRope();
+            rope.Retracting();
         }
 
         if (Input.GetButtonDown("Fire2"))
