@@ -15,8 +15,6 @@ public class Rope_Towards : MonoBehaviour
     [SerializeField] RopeSetter ropeSetter;
     Grapple_Stick_To_Wall grapple_Stick_To_Wall;
     [SerializeField] AudioSource hitSF;
-    [SerializeField] AudioSource grapplingSF;
-    [SerializeField] Animator retractingAnimController;
     [SerializeField] Animation retractAnimation;
 
     float distance;
@@ -56,6 +54,7 @@ public class Rope_Towards : MonoBehaviour
         circleCollider.enabled = false;
         hook.SetActive(false);
         DisableRope();
+        retracting = false;
     }
 
     public void SetStart(Vector2 targetPos)
@@ -94,6 +93,8 @@ public class Rope_Towards : MonoBehaviour
                 grapple_Stick_To_Wall.Attach(true);
             }
 
+            ropeSetter.playerCantGrapple = false;
+
             //Create a variebale that checks the distance between this object and the player's.
             distance = Vector2.Distance(transform.position, origin.position);
             if (!Input.GetButton("Vertical"))
@@ -110,9 +111,13 @@ public class Rope_Towards : MonoBehaviour
         }
         else
         {
-            
-            transform.position += velocity * Time.deltaTime;
-           
+            if (!retracting)
+            {
+                transform.position += velocity * Time.deltaTime;
+            }
+
+            ropeSetter.playerCantGrapple = true;
+
             //Create a variebale that checks the distance between this object and the player's.
             distance = Vector2.Distance(transform.position, origin.position);
 
@@ -122,7 +127,7 @@ public class Rope_Towards : MonoBehaviour
                 //playerPos = origin.transform.position;
                 //transform.position = Vector2.Lerp(transform.position, origin.transform.position, speed * Time.deltaTime);
                 Retracting();
-                return;
+                retracting = true;
                 //retracting = true;
             }
         }
@@ -130,20 +135,23 @@ public class Rope_Towards : MonoBehaviour
         line.SetPosition(0, transform.position);
         line.SetPosition(1, origin.position);
 
-        
-        if (retracting && !pull)
+        if (retracting)
         {
-            retractAnimation.Play();
-            //Retract to false when animation has played. 
+            transform.position = Vector2.MoveTowards(transform.position, origin.position, speed * Time.deltaTime);
+
+            if(distance <= 0)
+            {
+                DisableRope();
+            }
         }
 
     }
 
     public void Retracting()
     {
-        if (!retractAnimation.IsPlaying("Retracting"))
+        if (!retractAnimation.IsPlaying("Retract"))
         {
-            
+            //DisableRope();
         }
         else
         {
@@ -211,11 +219,6 @@ public class Rope_Towards : MonoBehaviour
         {
             hitEffect.Play();
             
-        }
-        if(collision.gameObject.layer != layerToGrab)
-        {
-            Retracting();
-            return;
         }
 
         //Remove force from the rope. 

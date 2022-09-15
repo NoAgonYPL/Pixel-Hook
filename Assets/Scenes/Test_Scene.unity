@@ -1196,8 +1196,6 @@ MonoBehaviour:
   circleCollider: {fileID: 75588509}
   ropeSetter: {fileID: 540970038}
   hitSF: {fileID: 75588513}
-  grapplingSF: {fileID: 0}
-  retractingAnimController: {fileID: 0}
   retractAnimation: {fileID: 1923484011}
   retracting: 0
   hitEffect: {fileID: 1106114366}
@@ -35663,9 +35661,11 @@ MonoBehaviour:
   ropeSetter: {fileID: 540970038}
   hitSF: {fileID: 1599602631}
   grapplingSF: {fileID: 0}
+  retracting: 0
+  retractAnimation: {fileID: 1923484011}
   hitEffect: {fileID: 971226910}
   targetIsGrabbed: 0
-  speed: 30
+  speed: 20
   grab_Force: 20
   maxDistance: 8
   layerToGrab: 12

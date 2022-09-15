@@ -14,6 +14,9 @@ public class Grab_Rope : MonoBehaviour
     [SerializeField] AudioSource hitSF;
     [SerializeField] AudioSource grapplingSF;
     Grapple_Stick_To_Wall grapple_Stick_To_Wall;
+    [HideInInspector] public bool retracting;
+    [SerializeField] Animation retractAnimation;
+    float distance;
 
     [SerializeField] ParticleSystem hitEffect;
 
@@ -45,6 +48,7 @@ public class Grab_Rope : MonoBehaviour
         circleCollider.enabled = false;
         hook.SetActive(false);
         DisableRope();
+        retracting = false;
     }
     public void SetStart(Vector2 targetPos)
     {
@@ -56,7 +60,7 @@ public class Grab_Rope : MonoBehaviour
         velocity = dir * speed;
         //This objects transform.position should be the player's position + the direction the rope is going in. 
         transform.position = origin.position + dir;
-
+        retracting = false;
         //Enabling and disabling variebales:
         circleCollider.enabled = true;
         pull = false;
@@ -83,8 +87,10 @@ public class Grab_Rope : MonoBehaviour
             //Normalize the direction to smooth it.
             dir = dir.normalized;
 
+            ropeSetter.canGrab = false;
+
             //Create a variebale that checks the distance between the grabbed object and the player's position.
-            float distance = Vector2.Distance(origin.position, target.position);
+            distance = Vector2.Distance(origin.position, target.position);
 
             //Pulls the object towards the player.
             if (target)
@@ -103,19 +109,47 @@ public class Grab_Rope : MonoBehaviour
         else
         {
 
-            //Fire the rope. 
-            transform.position += velocity * Time.deltaTime;
+            if (!retracting)
+            {
+                transform.position += velocity * Time.deltaTime;
+            }
+
+            ropeSetter.canGrab = true;
 
             //Create a variebale that checks the distance between this object and the player's.
-            float distance = Vector2.Distance(transform.position, origin.position);
+            distance = Vector2.Distance(transform.position, origin.position);
 
             //If the rope reaches max distance. 
             if (distance >= maxDistance)
             {
-                DisableRope();
-                return;
+                Retracting();
+                retracting = true;
+                //retracting = true;
             }
         }
+
+        if (retracting)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, origin.position, speed * Time.deltaTime);
+
+            if (distance <= 0)
+            {
+                hook.SetActive(false);
+                DisableRope();
+            }
+        }
+    }
+    public void Retracting()
+    {
+        if (!retractAnimation.IsPlaying("Retract"))
+        {
+            //DisableRope();
+        }
+        else
+        {
+            retracting = true;
+        }
+        //Do something when the animation is complete
     }
 
     //Disable the rope
@@ -123,12 +157,13 @@ public class Grab_Rope : MonoBehaviour
     {
         pull = false;
         line.enabled = false;
-
         //Reset the line's position
         line.SetPosition(0, Vector3.zero);
         line.SetPosition(1, Vector3.zero);
 
         //Enabling and disabling variebales:
+        retracting = false;
+
         circleCollider.enabled = false;
         hook.SetActive(false);
         ropeSetter.playerCantGrapple = false;
