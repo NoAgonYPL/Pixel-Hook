@@ -21,7 +21,7 @@ public class RopeSetter : MonoBehaviour
 
     void GrapplingHook()
     {
-        if (Input.GetButtonDown("Fire1") && !rope.retracting && playerCantGrapple)
+        if (Input.GetButtonDown("Fire1") && !playerCantGrapple)
         {
             Vector3 worldPoint = playerCam.ScreenToWorldPoint(Input.mousePosition);
             playerCantGrapple = true;
@@ -29,11 +29,19 @@ public class RopeSetter : MonoBehaviour
             grapplingSF.Play();
         }
 
-        if (Input.GetButtonUp("Fire1") && !rope.retracting && !playerCantGrapple)
+        if(Input.GetButtonDown("Jump"))
         {
-            rope_Grab.targetIsGrabbed = false;
             grapplingSF.Stop();
+            playerCantGrapple = false;
             rope.DisableRope();
+        }
+
+
+        if (Input.GetButtonUp("Fire1") && !rope.retracting)
+        {
+            grapplingSF.Stop();
+            playerCantGrapple = false;
+            rope.Retracting();
         }
 
         if (Input.GetButtonDown("Fire2") && canGrab)
@@ -44,7 +52,7 @@ public class RopeSetter : MonoBehaviour
             rope_Grab.SetStart(worldPoint);
         }
 
-        if (Input.GetButtonUp("Fire2") && !rope_Grab.retracting && !canGrab)
+        if (Input.GetButtonUp("Fire2") && !canGrab)
         {
             rope_Grab.targetIsGrabbed = false;
             grabSF.Stop();

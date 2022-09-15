@@ -55,11 +55,12 @@ public class Rope_Towards : MonoBehaviour
         hook.SetActive(false);
         DisableRope();
         retracting = false;
+        ropeSetter.playerCantGrapple = false;
     }
 
     public void SetStart(Vector2 targetPos)
     {
-            line.enabled = true;
+           
             //Direction the player will be pulled towards. 
             Vector2 dir = targetPos - origin.position;
             ropeSetter.playerCantGrapple = true;
@@ -73,6 +74,7 @@ public class Rope_Towards : MonoBehaviour
             circleCollider.enabled = true;
             pull = false;
             hook.SetActive(true);
+            line.enabled = true;
     }
 
     
@@ -116,7 +118,7 @@ public class Rope_Towards : MonoBehaviour
                 transform.position += velocity * Time.deltaTime;
             }
 
-            ropeSetter.playerCantGrapple = true;
+            //ropeSetter.playerCantGrapple = true;
 
             //Create a variebale that checks the distance between this object and the player's.
             distance = Vector2.Distance(transform.position, origin.position);
@@ -131,11 +133,9 @@ public class Rope_Towards : MonoBehaviour
                 //retracting = true;
             }
         }
-        //Draw a line from this object and the player. 
-        line.SetPosition(0, transform.position);
-        line.SetPosition(1, origin.position);
+        
 
-        if (retracting)
+        if (retracting && !pull)
         {
             transform.position = Vector2.MoveTowards(transform.position, origin.position, speed * Time.deltaTime);
 
@@ -145,6 +145,13 @@ public class Rope_Towards : MonoBehaviour
             }
         }
 
+    }
+
+    private void LateUpdate()
+    {
+        //Draw a line from this object and the player. 
+        line.SetPosition(0, transform.position);
+        line.SetPosition(1, origin.position);
     }
 
     public void Retracting()
@@ -218,7 +225,6 @@ public class Rope_Towards : MonoBehaviour
         if(collision != null)
         {
             hitEffect.Play();
-            
         }
 
         //Remove force from the rope. 
